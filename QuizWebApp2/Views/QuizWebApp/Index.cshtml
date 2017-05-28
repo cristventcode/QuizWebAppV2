@@ -4,43 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>All Quizzes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Quiz", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Author)
+            Author
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PublishDate)
+            Publish Date
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PublishDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuizId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.QuizId }) |
-            @Html.ActionLink("Questions", "../Questions/Index", new { quizId=item.QuizId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuizId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @item.PublishDate.ToShortDateString()
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuizId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.QuizId }) |
+                @Html.ActionLink("Questions", "../Questions/Index", new { quizId = item.QuizId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.QuizId })
+            </td>
+        </tr>
+    }
 
 </table>

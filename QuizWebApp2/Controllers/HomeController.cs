@@ -10,7 +10,7 @@ namespace QuizWebApp2.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "QuizWebApp");
         }
 
         public ActionResult About()
@@ -20,11 +20,11 @@ namespace QuizWebApp2.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        //public ActionResult Contact()
+        //{
+        //    ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 }

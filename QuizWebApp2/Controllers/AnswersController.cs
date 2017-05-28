@@ -13,7 +13,9 @@ namespace QuizWebApp2.Controllers
         // GET: Answers
         public ActionResult Index(int questionId)
         {
-            ViewBag.QuestionId = questionId;
+            Question questionTarget = _quizRepo.GetQuestionById(questionId);
+            ViewBag.QuizTitle = _quizRepo.GetQuizById(questionTarget.QuizId).Title;
+            ViewBag.QuestionInfo = questionTarget;
             return View(_quizRepo.GetAnswers(questionId));
         }
 

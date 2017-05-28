@@ -4,18 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
+<h4> @ViewBag.QuizTitle | Questions</h4>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { quizId = ViewBag.QuizId })
+    @Html.ActionLink("Create New Question", "Create", new { quizId = ViewBag.QuizId })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.QuizId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
+            Questions
         </th>
         <th></th>
     </tr>
@@ -23,9 +21,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuizId)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Content)
             </td>
@@ -39,3 +35,7 @@
     }
 
 </table>
+
+<div>
+    @Html.ActionLink("Back to Quizzes", "../QuizWebApp/Index")
+</div>
