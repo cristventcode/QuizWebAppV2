@@ -9,37 +9,40 @@
 <p>
     @Html.ActionLink("Create New Quiz", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>
-            Title
+            Quizzes
         </th>
-        <th>
-            Author
-        </th>
-        <th>
-            Publish Date
-        </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var quiz in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @quiz.Title
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @item.PublishDate.ToShortDateString()
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.QuizId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.QuizId }) |
-                @Html.ActionLink("Questions", "../Questions/Index", new { quizId = item.QuizId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.QuizId })
+                <div class="dropdown">
+                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="manage" data-toggle="dropdown">
+                        Manage
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="manage">
+                        <li>
+                            @Html.ActionLink("Edit", "Edit", new { id = quiz.QuizId })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Details", "Details", new { id = quiz.QuizId })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Questions", "../Questions/Index", new { quizId = quiz.QuizId })
+                        </li>
+                        <li> @Html.ActionLink("Delete", "Delete", new { id = quiz.QuizId }) </li>
+                    </ul>
+                </div>
             </td>
         </tr>
     }
