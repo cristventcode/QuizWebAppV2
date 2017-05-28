@@ -38,13 +38,11 @@ namespace QuizWebApp2.Controllers
             try
             {
                 // TODO: Add insert logic here
-
                 newQuiz.PublishDate = DateTime.Now;
-
                 _quizRepo.AddQuiz(newQuiz);
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -53,17 +51,17 @@ namespace QuizWebApp2.Controllers
         // GET: QuizWebApp/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_quizRepo.GetQuizById(id));
         }
 
         // POST: QuizWebApp/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Quiz EditedQuiz, FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
-
+                _quizRepo.EditQuiz(EditedQuiz);
                 return RedirectToAction("Index");
             }
             catch
@@ -75,7 +73,7 @@ namespace QuizWebApp2.Controllers
         // GET: QuizWebApp/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_quizRepo.GetQuizById(id));
         }
 
         // POST: QuizWebApp/Delete/5
@@ -85,7 +83,7 @@ namespace QuizWebApp2.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+                _quizRepo.DeleteQuiz(id);
                 return RedirectToAction("Index");
             }
             catch

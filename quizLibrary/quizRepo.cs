@@ -39,6 +39,17 @@ namespace quizLibrary
             }
         }
 
+        public void EditQuiz(Quiz editedQuiz)
+        {
+            using (var db = new quizDbContext())
+            {
+                db.QuizTable.Attach(editedQuiz);
+                var entry = db.Entry(editedQuiz);
+                entry.State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
         public void DeleteQuiz(int id)
         {
             using (var db = new quizDbContext())
@@ -79,6 +90,26 @@ namespace quizLibrary
             }
         }
 
+        public void EditQuestion(Question editedQuestion)
+        {
+            using (var db = new quizDbContext())
+            {
+                db.QuestionTable.Attach(editedQuestion);
+                var entry = db.Entry(editedQuestion);
+                entry.State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteQuestion(int id)
+        {
+            using (var db = new quizDbContext())
+            {
+                db.QuestionTable.Remove(GetQuestionById(id));
+                db.SaveChanges();
+            }
+        }
+
         public void AddAnswer(Answer newAnswer)
         {
             using (var db = new quizDbContext())
@@ -108,5 +139,24 @@ namespace quizLibrary
             }
         }
 
+        public void EditAnswer(Answer editedAnswer)
+        {
+            using (var db = new quizDbContext())
+            {
+                db.AnswerTable.Attach(editedAnswer);
+                var entry = db.Entry(editedAnswer);
+                entry.State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteAnswer(int id)
+        {
+            using (var db = new quizDbContext())
+            {
+                db.AnswerTable.Remove(GetAnswerById(id));
+                db.SaveChanges();
+            }
+        }
     }
 }

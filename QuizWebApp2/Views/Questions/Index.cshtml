@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new {quizId = ViewBag.QuizId})
+    @Html.ActionLink("Create New", "Create", new { quizId = ViewBag.QuizId })
 </p>
 <table class="table">
     <tr>
@@ -20,21 +20,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuizId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuestionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuestionId }) |
-            @Html.ActionLink("Answers", "../Answers/Index", new { questionId = item.QuestionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuestionId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.QuestionId }) |
+                @Html.ActionLink("Answers", "../Answers/Index", new { questionId = item.QuestionId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.QuestionId })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -288,6 +288,15 @@
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Answers\Create.cshtml" />
     <Content Include="Views\Answers\Index.cshtml" />
+    <Content Include="Views\Questions\Details.cshtml" />
+    <Content Include="Views\Questions\Edit.cshtml" />
+    <Content Include="Views\Questions\Delete.cshtml" />
+    <Content Include="Views\Answers\Delete.cshtml" />
+    <Content Include="Views\Answers\Edit.cshtml" />
+    <Content Include="Views\Answers\Details.cshtml" />
+    <Content Include="Views\QuizWebApp\Delete.cshtml" />
+    <Content Include="Views\QuizWebApp\Edit.cshtml" />
+    <Content Include="Views\QuizWebApp\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

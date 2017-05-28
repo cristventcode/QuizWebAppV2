@@ -20,7 +20,7 @@ namespace QuizWebApp2.Controllers
         // GET: Questions/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_quizRepo.GetQuestionById(id));
         }
 
         // GET: Questions/Create
@@ -49,18 +49,18 @@ namespace QuizWebApp2.Controllers
         // GET: Questions/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_quizRepo.GetQuestionById(id));
         }
 
         // POST: Questions/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Question editedQuestion, FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                _quizRepo.EditQuestion(editedQuestion);
+                return RedirectToAction("Index", new { quizId = editedQuestion.QuizId });
             }
             catch
             {
@@ -71,7 +71,7 @@ namespace QuizWebApp2.Controllers
         // GET: Questions/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_quizRepo.GetQuestionById(id));
         }
 
         // POST: Questions/Delete/5
@@ -81,8 +81,8 @@ namespace QuizWebApp2.Controllers
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                _quizRepo.DeleteQuestion(id);
+                return RedirectToAction("Index", new { quizId = _quizRepo.GetQuestionById(id).QuizId });
             }
             catch
             {
