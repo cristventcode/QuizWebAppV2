@@ -16,6 +16,7 @@ namespace QuizWebApp2.Controllers
             Question questionTarget = _quizRepo.GetQuestionById(questionId);
             ViewBag.QuizTitle = _quizRepo.GetQuizById(questionTarget.QuizId).Title;
             ViewBag.QuestionInfo = questionTarget;
+            ViewBag.QuestionId = questionId;
             return View(_quizRepo.GetAnswers(questionId));
         }
 
