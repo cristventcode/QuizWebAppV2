@@ -15,7 +15,8 @@
         <th>
             Quizzes
         </th>
-        <th>Actions</th>
+        <th class="text-center">Play</th>
+        <th>Manage</th>
     </tr>
 
     @foreach (var quiz in Model)
@@ -23,6 +24,10 @@
         <tr>
             <td>
                 @quiz.Title
+            </td>
+            <td class="text-center">
+                <button class="btn btn-xs btn-default"> @Html.ActionLink("Play", "GameArea", new { id = quiz.QuizId })
+ </button>
             </td>
             <td>
                 <div class="dropdown">

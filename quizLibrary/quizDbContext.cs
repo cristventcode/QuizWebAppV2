@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace quizLibrary
 {
-    class quizDbContext : DbContext
+    public class quizDbContext : DbContext
     {
         public quizDbContext()
          : base("name=DefaultConnection")

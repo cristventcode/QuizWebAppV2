@@ -91,5 +91,12 @@ namespace QuizWebApp2.Controllers
                 return View();
             }
         }
+
+
+        public ActionResult GameArea(int id)
+        {
+            ViewBag.QuizId = id;
+            return View();
+        }
     }
 }
