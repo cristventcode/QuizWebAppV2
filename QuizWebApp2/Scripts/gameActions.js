@@ -2,14 +2,15 @@
 var game = {
     questions: {},
     current: 0,
-    currentQuestionId : 0
+    currentQuestionId: 0
 }
 
 
 var answersHolder = document.getElementById("answers-holder"),
     questionContent = document.getElementById("question-content"),
     nextBtn = document.getElementById("next-button"),
-    previousBtn = document.getElementById("previous-button");
+    previousBtn = document.getElementById("previous-button"),
+    answerResultHolder = document.getElementById("answer-result-holder");
 
 
 $(document).ready(function () {
@@ -26,11 +27,14 @@ function renderQuestion() {
     questionContent.innerText = game.questions[game.current].Content;
     game.currentQuestionId = game.questions[game.current].QuestionId;
 
+
+    var count = 0;
+
     for (var answer in game.questions[game.current].Answers) {
         var element = document.createElement("li"),
             idSpan = document.createElement("span");
 
-        idSpan.innerText = game.questions[game.current].Answers[answer].AnswerId;
+        idSpan.innerText = count++;
         idSpan.classList.add("hidden");
 
         element.classList.add("list-group-item");
@@ -44,6 +48,7 @@ function renderQuestion() {
 nextBtn.addEventListener("click", function () {
     if (game.current < game.questions.length - 1) {
         game.current++;
+        game.currentQuestionId = game.questions[game.current].QuestionId;
     }
     clearElements();
     renderQuestion();
@@ -52,6 +57,7 @@ nextBtn.addEventListener("click", function () {
 previousBtn.addEventListener("click", function () {
     if (game.current > 0) {
         game.current--;
+        game.currentQuestionId = game.questions[game.current].QuestionId;
     }
     clearElements();
     renderQuestion();
@@ -60,12 +66,20 @@ previousBtn.addEventListener("click", function () {
 function clearElements() {
     answersHolder.innerHTML = "";
     questionContent.innerText = "";
+    answerResultHolder.innerText = "";
 }
 
 $(document).on('click', ".answer-item", function (event) {
-    console.log(event.currentTarget.getElementsByTagName("span")[0].innerText);
+    var result = game.questions[game.current].Answers[event.currentTarget.getElementsByTagName("span")[0].innerText].IsCorrect;
 
-    console.log(game.currentQuestionId);
+    if (result) {
+        answerResultHolder.classList.remove("wrong");
+        answerResultHolder.classList.add("correct");
+    } else {
+        answerResultHolder.classList.remove("correct");
+        answerResultHolder.classList.add("wrong");
+    }
 
-    
+    answerResultHolder.innerText = result;
+
 });

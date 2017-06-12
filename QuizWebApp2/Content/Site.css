@@ -27,3 +27,11 @@ textarea {
     background-color: #f7f7f7;
     color: lightseagreen;
 }
+
+.correct {
+    color: green;
+}
+
+.wrong {
+    color: red;
+}
