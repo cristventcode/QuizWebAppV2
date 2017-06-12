@@ -1,21 +1,8 @@
 ﻿
-var game = {
-    questions: {},
-    current: 0,
-    currentQuestionId: 0
-}
-
-
-var answersHolder = document.getElementById("answers-holder"),
-    questionContent = document.getElementById("question-content"),
-    nextBtn = document.getElementById("next-button"),
-    previousBtn = document.getElementById("previous-button"),
-    answerResultHolder = document.getElementById("answer-result-holder");
-
-
+// Get questions from API on page load 
 $(document).ready(function () {
     var quizId = document.getElementById("gameId").innerText;
-    var path = "http://localhost:57726/api/GameActions/" + quizId;
+    var path = "/api/GameActions/" + quizId;
 
     $.getJSON(path, function (data) {
         game.questions = data;
@@ -23,52 +10,66 @@ $(document).ready(function () {
     });
 });
 
+// Game data object
+var game = {
+    questions: {},
+    current: 0,
+}
+
+// Variables for elements
+var answersHolder = document.getElementById("answers-holder"),
+    questionContent = document.getElementById("question-content"),
+    nextBtn = document.getElementById("next-button"),
+    previousBtn = document.getElementById("previous-button"),
+    answerResultHolder = document.getElementById("answer-result-holder");
+
+
+// Render out question and answers
 function renderQuestion() {
     questionContent.innerText = game.questions[game.current].Content;
-    game.currentQuestionId = game.questions[game.current].QuestionId;
-
-
     var count = 0;
-
     for (var answer in game.questions[game.current].Answers) {
-        var element = document.createElement("li"),
-            idSpan = document.createElement("span");
 
-        idSpan.innerText = count++;
-        idSpan.classList.add("hidden");
+        var answerLi = document.createElement("li"),
+            answerPosition = document.createElement("span");
 
-        element.classList.add("list-group-item");
-        element.classList.add("answer-item");
-        element.innerText = game.questions[game.current].Answers[answer].Content;
-        element.appendChild(idSpan);
-        answersHolder.appendChild(element);
+        answerPosition.innerText = count++;
+        answerPosition.classList.add("hidden");
+        answerLi.classList.add("list-group-item");
+        answerLi.classList.add("answer-item");
+        answerLi.innerText = game.questions[game.current].Answers[answer].Content;
+
+        answerLi.appendChild(answerPosition);
+        answersHolder.appendChild(answerLi);
     };
 };
 
+// Next button events 
 nextBtn.addEventListener("click", function () {
     if (game.current < game.questions.length - 1) {
         game.current++;
-        game.currentQuestionId = game.questions[game.current].QuestionId;
     }
     clearElements();
     renderQuestion();
 })
 
+// Previous button events
 previousBtn.addEventListener("click", function () {
     if (game.current > 0) {
         game.current--;
-        game.currentQuestionId = game.questions[game.current].QuestionId;
     }
     clearElements();
     renderQuestion();
 })
 
+// Clear elements function
 function clearElements() {
     answersHolder.innerHTML = "";
     questionContent.innerText = "";
     answerResultHolder.innerText = "";
 }
 
+// On answer click events
 $(document).on('click', ".answer-item", function (event) {
     var result = game.questions[game.current].Answers[event.currentTarget.getElementsByTagName("span")[0].innerText].IsCorrect;
 
@@ -80,6 +81,6 @@ $(document).on('click', ".answer-item", function (event) {
         answerResultHolder.classList.add("wrong");
     }
 
-    answerResultHolder.innerText = result;
+    answerResultHolder.innerText = result.toString().toUpperCase();
 
 });
